@@ -30,5 +30,90 @@ const mapFn = (array, callback) => {
 
 const resultArray = mapFn(testArray, addTwo);
 
+// .entries
 
+const entriesFn = (array) => {
+  let iterator = {};
+  for (let i = 0; i < array.length; i++) {
+    iterator = {
+      ...iterator,
+      [i]: [i, array[i]],
+    };
+  }
 
+  return iterator;
+};
+
+console.log(entriesFn(testArray));
+
+// .filter
+
+const condFunc = (item) => {
+  return item > 3;
+};
+
+const filterFn = (array, callback) => {
+  const resultsArr = [];
+
+  for (item of array) {
+    if (callback(item)) {
+      resultsArr.push(item);
+    }
+  }
+
+  return resultsArr;
+};
+
+console.log(filterFn(testArray, condFunc));
+
+// .reduce
+
+const callbackFunc = (result, item) => {
+  return result + item;
+};
+
+const reduceFn = (array, callback, inital) => {
+  let result = inital;
+
+  for (item of array) {
+    result = callback(result, item);
+  }
+
+  return result;
+};
+
+const result = reduceFn(testArray, callbackFunc, 0);
+
+// .every
+
+const testFunc = (item) => {
+  return item > 4 ? true : false;
+};
+
+const everyFn = (array, callback) => {
+  let results = [];
+  for (item of array) {
+    results.push(callback(item));
+  }
+
+  if (results.includes(false)) {
+    return false;
+  } else return true;
+};
+
+console.log(everyFn(testArray, testFunc));
+
+// .some
+
+const someFn = (array, callback) => {
+  let results = [];
+  for (item of array) {
+    results.push(callback(item));
+  }
+
+  if (results.includes(true)) {
+    return true;
+  } else return false;
+};
+
+console.log(someFn(testArray, testFunc));
